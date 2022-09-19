@@ -24,7 +24,7 @@ const login = async (req, res) => {
     const { id, email } = req.user;
     try {
         const token = await sign({ id, email }, SECRET);
-        return res.status(200).cookie('token', token, { httpOnly: true }).send({ message: 'Logged in successfully.' });
+        return res.status(200).cookie('token', token, { httpOnly: true }).send({ message: 'Logged in successfully.', user: req.user });
     } catch (err) {
         console.log(err.message);
         return res.status(500).send({ error: err.message });
@@ -40,8 +40,18 @@ const logout = async (req, res) => {
     }
 }
 
+const getMe = async (req, res) => {
+    try {
+        return res.status(200).send({ user: req.user });
+    } catch (err) {
+        console.log(err.message);
+        return res.status(500).send({ error: err.message }); 
+    }
+}
+
 module.exports = {
     register,
     login,
-    logout
+    logout,
+    getMe
 };

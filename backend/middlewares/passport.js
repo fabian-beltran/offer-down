@@ -11,11 +11,11 @@ passport.use(new Strategy(
     { secretOrKey: SECRET, jwtFromRequest: cookieExtractor },
     async ({ id }, done) => {
         try {
-            const { rows } = await db.query('SELECT id, email FROM users WHERE id = $1', [id]);
+            const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id]);
 
             if (!rows.length) throw new Error('Not Authorized');
 
-            const user = rows[0];
+            const user = { ...rows[0], password: undefined };
 
             return await done(null, user);
         } catch (err) {

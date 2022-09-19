@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { register, login, logout } = require('../controllers/auth');
+const { register, login, logout, getMe } = require('../controllers/auth');
 const { validation } = require('../middlewares/validation');
 const { userAuth } = require('../middlewares/auth');
 
@@ -11,7 +11,10 @@ const loginValidation = require('../validators/auth/login');
 router.post('/register', registerValidation, validation, register);
 router.post('/login', loginValidation, validation, login);
 
-router.post('/logout', userAuth, logout);
+router.post('/logout', logout);
+
+router.get('/me', userAuth, getMe);
+
 
 
 

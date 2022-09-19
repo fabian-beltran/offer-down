@@ -12,7 +12,7 @@ const login = check('email').custom(async (value, { req }) => {
 
     if (!validPassword) throw new Error('Password is incorrect.');
 
-    req.user = user;
+    req.user = { ...user, password: undefined };
 });
 
 module.exports = [login];

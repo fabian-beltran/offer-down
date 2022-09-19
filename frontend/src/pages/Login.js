@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Typography, TextField, Stack, Button, Box } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form';
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
     const { handleSubmit, control, formState: { errors } } = useForm();
+    const { login, user, setUser } = useAuth();
 
-    const onSubmit = (form) => {
-        console.log(form);
+    const onSubmit = async (form) => {
+        await login(form);
+        console.log('contextuser', user);
     };
 
     return (
@@ -21,7 +24,7 @@ const Login = () => {
                         [
                             { label: 'Email', formName: 'email', rules: { required: true } },
                             { label: 'Password', formName: 'password', rules: { required: true } },
-                        ].map(({ label, formName, rules }) => <Box>
+                        ].map(({ label, formName, rules }) => <Box key={formName}>
                                 <Controller
                                     name={formName}
                                     control={control}

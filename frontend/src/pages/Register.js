@@ -1,12 +1,15 @@
 import React from 'react'
 import { Container, Typography, TextField, Stack, Button, Box } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form'
+import useAuth from '../hooks/useAuth';
 
 const Register = () => {
     const { handleSubmit, control, formState: { errors } } = useForm();
+    const { register } = useAuth();
     
-    const onSubmit = (form) => {
-        console.log(form);
+    const onSubmit = async (form) => {
+        const res = await register(form);
+        console.log(res);
     }
 
     return (
@@ -18,16 +21,16 @@ const Register = () => {
                 <Stack spacing={2}>
                     {
                         [
-                            { label: 'First Name', formName: 'firstName', rules: { required: true } },
-                            { label: 'Last Name', formName: 'lastName', rules: { required: true } },
+                            { label: 'First Name', formName: 'first_name', rules: { required: true } },
+                            { label: 'Last Name', formName: 'last_name', rules: { required: true } },
                             { label: 'Email', formName: 'email', rules: { required: true } },
                             { label: 'Password', formName: 'password', rules: { required: true } },
-                        ].map(({ label, formName, rules }) => <Box>
+                        ].map(({ label, formName, rules }) => <Box key={formName}>
                                 <Controller
                                     name={formName}
                                     control={control}
                                     rules={rules}
-                                    render={({ field }) => <TextField {...field} variant='outlined' label={label} required={rules.required} error={Boolean(errors[formName])} fullWidth/>}
+                                    render={({ field }) => <TextField {...field} variant='outlined' label={label} required={Boolean(rules.required)} error={Boolean(errors[formName])} fullWidth/>}
                                 />
                             </Box>
                         )
