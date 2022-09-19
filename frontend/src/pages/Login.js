@@ -15,7 +15,7 @@ const Login = () => {
 
     return (
         <Container sx={{ py: 4 }} maxWidth='xs'>
-            <Typography align='center' variant='h3' color='primary' sx={{ mb: 4 }}>
+            <Typography align='center' variant='h3' color='primary' sx={{ mb: 4 }} fontWeight='bold'>
                 Login
             </Typography>
             <Box component='form' noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>

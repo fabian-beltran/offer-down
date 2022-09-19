@@ -8,7 +8,8 @@ import Layout from './components/Layout'
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import AccountSettings from './pages/AccountSettings';
+import AccountSettings from './pages/authenticated/AccountSettings';
+import CreateItem from './pages/authenticated/CreateItem';
 
 function App() {
 
@@ -26,10 +27,9 @@ function App() {
                                 <Route path='/register' element={<Register />} />
                             </Route>
                             <Route element={<AuthRoutes />}>
-                                <Route
-                                    element={<AccountSettings />}
-                                    path='/account-settings'
-                                />
+                                <Route element={<AccountSettings />} path='/account' />
+                                <Route element={<CreateItem />} path='/create' />
+
                             </Route>
                         </Routes>
                     </Layout>

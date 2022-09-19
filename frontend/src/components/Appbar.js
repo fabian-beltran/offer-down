@@ -21,7 +21,7 @@ const Appbar = () => {
                                 <Typography variant='body1'>{user.first_name}</Typography>
                                 {/* <Button variant='contained' sx={{ backgroundColor: theme.palette.error.light }} onClick={logout}>Logout</Button> */}
                                 <Tooltip title='Add Item' arrow>
-                                    <IconButton sx={{ color: theme.palette.primary.light }}>
+                                    <IconButton sx={{ color: theme.palette.primary.light }} component={Link} to='/create'>
                                         <AddCircleIcon/>
                                     </IconButton>
                                 </Tooltip>
