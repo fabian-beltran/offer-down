@@ -23,13 +23,13 @@ const Login = () => {
                     {
                         [
                             { label: 'Email', formName: 'email', rules: { required: true } },
-                            { label: 'Password', formName: 'password', rules: { required: true } },
-                        ].map(({ label, formName, rules }) => <Box key={formName}>
+                            { label: 'Password', formName: 'password', rules: { required: true }, type: 'password' },
+                        ].map(({ label, formName, rules, type }) => <Box key={formName}>
                                 <Controller
                                     name={formName}
                                     control={control}
                                     rules={rules}
-                                    render={({ field }) => <TextField {...field} variant='outlined' label={label} required={rules.required} error={Boolean(errors[formName])} fullWidth/>}
+                                    render={({ field }) => <TextField {...field} variant='outlined' label={label} type={type} required={rules.required} error={Boolean(errors[formName])} fullWidth/>}
                                 />
                             </Box>
                         )
