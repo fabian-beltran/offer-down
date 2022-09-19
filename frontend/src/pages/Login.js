@@ -6,7 +6,7 @@ import useAuth from '../hooks/useAuth';
 
 const Login = () => {
     const { handleSubmit, control, formState: { errors } } = useForm();
-    const { login, user, setUser } = useAuth();
+    const { login, user } = useAuth();
 
     const onSubmit = async (form) => {
         await login(form);
