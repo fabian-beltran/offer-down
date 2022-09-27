@@ -1,22 +1,22 @@
 import React from 'react'
 import { Grid, Card, CardMedia, CardContent, Typography, ButtonBase } from '@mui/material'
 
-const ItemCard = () => {
+const ItemCard = ({ title, price }) => {
     return (
         <Grid item xs={3}>
             <ButtonBase disableRipple>
                 <Card elevation={6}>
                     <CardMedia
                         component='img'
-                        image='https://upload.wikimedia.org/wikipedia/commons/4/4f/SIG_Pro_by_Augustas_Didzgalvis.jpg'
+                        image='https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'
                         alt='item'
                     />
                     <CardContent>
                         <Typography gutterBottom variant='h5'>
-                            Gun and Ammo
+                            { title }
                         </Typography>
                         <Typography variant='body1' color='text.secondary'>
-                            $1200
+                            ${ price }
                         </Typography>
                     </CardContent>
                 </Card>

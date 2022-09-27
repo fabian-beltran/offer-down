@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import AccountSettings from './pages/authenticated/AccountSettings';
 import CreateItem from './pages/authenticated/CreateItem';
+import Item from './pages/authenticated/Item';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
                     <Layout>
                         <Routes>
                             <Route path='/' element={<Home />} />
+                            <Route path='/item' element={<Item/>}/>
                             
                             <Route element={<UnauthRoutes/>}>
                                 <Route path='/login' element={<Login />} />

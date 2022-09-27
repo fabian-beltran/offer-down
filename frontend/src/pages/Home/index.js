@@ -12,7 +12,10 @@ const Home = () => {
             <Divider sx={{ mt: 2, mb: 4 }}/>
 
             <Grid container spacing={2}>
-                
+                <ItemCard
+                    title='Item'
+                    price={1200}
+                />
             </Grid>
         </Container>
     );
