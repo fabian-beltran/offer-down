@@ -1,7 +1,12 @@
 import React from 'react'
 import { Grid, Card, CardMedia, CardContent, Typography, ButtonBase } from '@mui/material'
 
-const ItemCard = ({ title, price }) => {
+const usdFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
+
+const ItemCard = ({ title, price, imageUrl }) => {
     return (
         <Grid item xs={3}>
             <ButtonBase disableRipple>
@@ -9,14 +14,15 @@ const ItemCard = ({ title, price }) => {
                     <CardMedia
                         component='img'
                         image='https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'
-                        alt='item'
+                        //image={imageUrl}
+                        alt={title}
                     />
                     <CardContent>
                         <Typography gutterBottom variant='h5'>
                             { title }
                         </Typography>
                         <Typography variant='body1' color='text.secondary'>
-                            ${ price }
+                            { usdFormatter.format(price) }
                         </Typography>
                     </CardContent>
                 </Card>

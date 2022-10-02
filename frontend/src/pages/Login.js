@@ -10,7 +10,6 @@ const Login = () => {
 
     const onSubmit = async (form) => {
         await login(form);
-        console.log('contextuser', user);
     };
 
     return (
