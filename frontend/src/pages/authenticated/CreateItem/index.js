@@ -4,16 +4,25 @@ import { Container, Typography, Divider, Box, Grid, Stack, TextField, MenuItem, 
 import { useForm, Controller } from 'react-hook-form'
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { createItem } from '../../../services/items';
+import { uploadImage } from '../../../services/images';
 
 const CreateItem = () => {
-    const { control, handleSubmit, watch } = useForm();
+    const { control, handleSubmit, watch, setValue } = useForm();
     const navigate = useNavigate();
 
     const onSubmit = (form) => {
-        form.image_url = 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png';
         createItem(form).then(() => {
             navigate('/');
         })
+    };
+
+    const handleImageUpload = async (e) => {
+        if (!e.target.files.length) return;
+        const formData = new FormData();
+        formData.append('image', e.target.files[0]);
+        const uploadResult = await uploadImage(formData);
+        setValue('image_url', uploadResult.data.image_url);
+        console.log('WATCH', watch())
     }
 
     return <Container sx={{ py: 4 }}>
@@ -31,7 +40,7 @@ const CreateItem = () => {
                             control={control}
                             render={({ field }) => <Tooltip title='Upload Image' placement='left' arrow>
                                 <IconButton {...field} disableRipple component='label'>
-                                    <input hidden accept="image/*" type="file" />
+                                    <input hidden accept="image/*" type="file" name='image' onChange={handleImageUpload} />
                                     <FileUploadIcon/>
                                 </IconButton>
                             </Tooltip>}

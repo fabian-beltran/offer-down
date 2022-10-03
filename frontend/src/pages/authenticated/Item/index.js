@@ -25,20 +25,20 @@ const Item = () => {
                 <Grid item xs={6}>
                     <Box
                         component='img'
-                        src='https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'
-                        sx={{ borderRadius: 1 }}
+                        src={item.image_url || 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'}
+                        sx={{ borderRadius: 1, width: '100%', height: '100%', objectFit: 'cover' }}
                     />
-                    {/* <Box sx={{ width: '100%', height: '100%', borderRadius: 1, backgroundImage: `url(https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png)`, backgroundSize: 'cover' }}>
-
-                    </Box> */}
                 </Grid>
                 <Grid item xs={3}>
-                    <Stack spacing={2}>
+                    <Stack spacing={1.5}>
                         <Typography variant='h4' fontWeight='bold'>
                             { item.title }
                         </Typography>
                         <Typography variant='h3' fontWeight='bold'>
                             { usdFormatter.format(item.price) }
+                        </Typography>
+                        <Typography variant='body1'>
+                            Seller: Fabian Beltran
                         </Typography>
                         <Typography variant='body1'>
                             Last updated about 3 days ago

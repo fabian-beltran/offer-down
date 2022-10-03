@@ -20,8 +20,7 @@ const ItemCard = ({ item }) => {
                 <Card elevation={6}>
                     <CardMedia
                         component='img'
-                        image='https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'
-                        //image={imageUrl}
+                        image={item.image_url || 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'}
                         alt={item.title}
                     />
                     <CardContent>
