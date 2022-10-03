@@ -8,7 +8,7 @@ const register = async (req, res) => {
     try {
         const hashedPassword = await hash(password, 10);
 
-        await db.query('INSERT INTO users(first_name, last_name, email, password) VALUES($1, $2, $3, $4)', [first_name, last_name, email, hashedPassword]);
+        await db.query('INSERT INTO "user"(first_name, last_name, email, password) VALUES($1, $2, $3, $4)', [first_name, last_name, email, hashedPassword]);
 
         return res.status(201).send({
             message: 'User created.'

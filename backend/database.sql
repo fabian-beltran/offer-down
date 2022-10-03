@@ -1,6 +1,6 @@
 CREATE DATABASE offerdown;
 
-CREATE TABLE users(
+CREATE TABLE "user"(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE users(
 CREATE TYPE exchange_method AS ENUM ('pickup', 'delivery');
 CREATE TABLE item(
     id SERIAL PRIMARY KEY,
-    seller_id INT NOT NULL,
+    seller_id INT NOT NULL REFERENCES "user" (id),
     title VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL,
     "description" VARCHAR(255),

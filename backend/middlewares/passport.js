@@ -11,7 +11,7 @@ passport.use(new Strategy(
     { secretOrKey: SECRET, jwtFromRequest: cookieExtractor },
     async ({ id }, done) => {
         try {
-            const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id]);
+            const { rows } = await db.query('SELECT * FROM "user" WHERE id = $1', [id]);
 
             if (!rows.length) throw new Error('Not Authorized');
 
