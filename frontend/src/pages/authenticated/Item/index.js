@@ -38,7 +38,7 @@ const Item = () => {
                             { usdFormatter.format(item.price) }
                         </Typography>
                         <Typography variant='body1'>
-                            Seller: Fabian Beltran
+                            Seller: { item.first_name } { item.last_name }
                         </Typography>
                         <Typography variant='body1'>
                             Last updated about 3 days ago

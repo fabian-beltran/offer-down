@@ -33,8 +33,8 @@ const CreateItem = () => {
 
         <Box component='form' noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={4} justifyContent='center'>
-                <Grid item xs={6}>
-                    <Box sx={{ width: '100%', height: '100%', borderRadius: 1, backgroundImage: `url(${watch('image_url') || 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'})`, backgroundSize: 'cover' }}>
+                <Grid item xs={7}>
+                    <Box sx={{ width: '100%', height: '100%', borderRadius: 1, backgroundImage: `url(${watch('image_url') || 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                         <Controller
                             name='image_url'
                             control={control}

@@ -16,8 +16,8 @@ const ItemCard = ({ item }) => {
 
     return (
         <Grid item xs={3}>
-            <ButtonBase disableRipple onClick={handleClick}>
-                <Card elevation={6}>
+            <ButtonBase disableRipple onClick={handleClick} sx={{ height: '100%' }}>
+                <Card elevation={6} sx={{ height: '100%' }}>
                     <CardMedia
                         component='img'
                         image={item.image_url || 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'}

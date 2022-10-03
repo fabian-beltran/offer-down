@@ -13,7 +13,7 @@ const getItems = async (req, res) => {
 const getItem = async (req, res) => {
     const { id } = req.params;
     try {
-        const _res = await db.query('SELECT * FROM item WHERE id = $1', [id]);
+        const _res = await db.query('SELECT item.*, "user".first_name, "user".last_name FROM item JOIN "user" ON item.seller_id = "user".id WHERE item.id = $1', [id]);
         if (!_res.rows.length) return res.status(404).send({ message: 'Item not found.' })
         return res.status(200).send(_res.rows[0]);
     } catch (err) {
