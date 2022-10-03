@@ -20,10 +20,9 @@ const Home = () => {
 
             <Grid container spacing={2}>
                 {
-                    items.map(({ title, price, image_url }) => <ItemCard
-                        title={title}
-                        price={price}
-                        imageUrl={image_url}
+                    items.map((item) => <ItemCard
+                        key={item.id}
+                        item={item}
                     />)
                 }
                 

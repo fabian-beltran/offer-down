@@ -1,13 +1,19 @@
 import React from 'react'
-import { Container, Typography, Divider, Box, Grid, Stack, TextField, MenuItem, ToggleButtonGroup, ToggleButton, IconButton, Tooltip, Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom';
+import { Container, Typography, Divider, Box, Grid, Stack, TextField, MenuItem, ToggleButtonGroup, ToggleButton, IconButton, Tooltip, Button, InputAdornment } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form'
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import { createItem } from '../../../services/items';
 
 const CreateItem = () => {
     const { control, handleSubmit, watch } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = (form) => {
-        console.log(form);
+        form.image_url = 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png';
+        createItem(form).then(() => {
+            navigate('/');
+        })
     }
 
     return <Container sx={{ py: 4 }}>
@@ -19,9 +25,9 @@ const CreateItem = () => {
         <Box component='form' noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={4} justifyContent='center'>
                 <Grid item xs={6}>
-                    <Box sx={{ width: '100%', height: '100%', borderRadius: 1, backgroundImage: `url(${watch('image') || 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'})`, backgroundSize: 'cover' }}>
+                    <Box sx={{ width: '100%', height: '100%', borderRadius: 1, backgroundImage: `url(${watch('image_url') || 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'})`, backgroundSize: 'cover' }}>
                         <Controller
-                            name='image'
+                            name='image_url'
                             control={control}
                             render={({ field }) => <Tooltip title='Upload Image' placement='left' arrow>
                                 <IconButton {...field} disableRipple component='label'>
@@ -41,6 +47,11 @@ const CreateItem = () => {
                             render={({ field }) => <TextField variant='outlined' label='Title' required {...field} />}
                         />
                         <Controller
+                            name='price'
+                            control={control}
+                            render={({ field }) => <TextField variant='outlined' label='Price' InputProps={{ startAdornment: <InputAdornment>$</InputAdornment> }} required {...field} />}
+                        />
+                        <Controller
                             name='condition'
                             control={control}
                             render={({ field }) => <TextField {...field} variant='outlined' label='Condition' select required>
@@ -55,7 +66,7 @@ const CreateItem = () => {
                             render={({ field }) => <TextField {...field} variant='outlined' label='Description' multiline rows={5} />}
                         />
                         <Controller
-                            name='exchangeMethod'
+                            name='exchange_method'
                             control={control}
                             render={({ field }) => <ToggleButtonGroup {...field} fullWidth color='primary' defaultValue='pickup'>
                                 <ToggleButton value='pickup'>Pickup</ToggleButton>

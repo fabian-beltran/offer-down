@@ -22,7 +22,7 @@ function App() {
                     <Layout>
                         <Routes>
                             <Route path='/' element={<Home />} />
-                            <Route path='/item' element={<Item/>}/>
+                            <Route path='/item/:id' element={<Item/>}/>
                             
                             <Route element={<UnauthRoutes/>}>
                                 <Route path='/login' element={<Login />} />

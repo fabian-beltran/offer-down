@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Container, Grid, Typography, Divider, Box, Stack, Button } from '@mui/material';
 import ShareIcon from '@mui/icons-material/ShareOutlined'; 
 import FavoriteIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { getItem } from '../../../services/items';
+
+const usdFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 
 const Item = () => {
-    return (
+    const { id } = useParams();
+    const [item, setItem] = useState();
+
+    useEffect(() => {
+        getItem(id).then(({ data }) => setItem(data));
+    }, [id]);
+
+    return item && (
         <Container sx={{ py: 8 }}>
             <Grid container spacing={4} justifyContent='center'>
                 <Grid item xs={6}>
@@ -21,15 +35,15 @@ const Item = () => {
                 <Grid item xs={3}>
                     <Stack spacing={2}>
                         <Typography variant='h4' fontWeight='bold'>
-                            Item Title Here
+                            { item.title }
                         </Typography>
                         <Typography variant='h3' fontWeight='bold'>
-                            $550
+                            { usdFormatter.format(item.price) }
                         </Typography>
                         <Typography variant='body1'>
                             Last updated about 3 days ago
                         </Typography>
-                        <Typography variant='body1'>Condition: New</Typography>
+                        <Typography variant='body1'>Condition: { item.condition === 'new' ? 'New' : item.condition === 'used' ? 'Used' : item.condition === 'openbox' ? 'Open Box' : '' }</Typography>
                         <Button
                             variant='contained'
                             endIcon={<AddShoppingCartIcon />}
@@ -50,15 +64,7 @@ const Item = () => {
                     </Typography>
                     <Divider sx={{ mt: 1, mb: 2 }} />
                     <Typography variant='body1'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum
+                        { item.description }
                     </Typography>
                 </Grid>
             </Grid>

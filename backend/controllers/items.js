@@ -3,19 +3,31 @@ const db = require('../db');
 const getItems = async (req, res) => {
     try {
         const results = await db.query('SELECT * FROM item');
-        return res.status(200).send(results.rows);
+        return res.status(200).send(results.rows.reverse());
     } catch (err) {
         console.log(err.message);
         return res.status(500).send({ error: err.message });
     }
 }
 
+const getItem = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const _res = await db.query('SELECT * FROM item WHERE id = $1', [id]);
+        if (!_res.rows.length) return res.status(404).send({ message: 'Item not found.' })
+        return res.status(200).send(_res.rows[0]);
+    } catch (err) {
+        console.log(err.message);
+        return res.status(500).send({ error: err.message });
+    }
+};
+
 const createItem = async (req, res) => {
-    const { title, price, description, image_url, exchange_method } = req.body;
+    const { title, price, description, condition, image_url, exchange_method } = req.body;
     const { id: seller_id } = req.user;
     try {
-        await db.query('INSERT INTO item(title, price, description, image_url, exchange_method, seller_id) VALUES($1, $2, $3, $4, $5, $6)', [title, price, description, image_url, exchange_method, seller_id]);
-        res.status(201).send({ message: 'Item created.' })
+        const _res = await db.query('INSERT INTO item(title, price, description, condition, image_url, exchange_method, seller_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *', [title, price, description, condition, image_url, exchange_method, seller_id]);
+        res.status(201).send({ message: 'Item created.', item: _res.rows[0] })
     } catch (err) {
         console.log(err.message);
         return res.status(500).send({ error: err.message });
@@ -38,6 +50,7 @@ const deleteItem = async (req, res) => {
 
 module.exports = {
     getItems,
+    getItem,
     createItem,
     deleteItem
 }

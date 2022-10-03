@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Grid, Card, CardMedia, CardContent, Typography, ButtonBase } from '@mui/material'
 
 const usdFormatter = new Intl.NumberFormat('en-US', {
@@ -6,23 +7,29 @@ const usdFormatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
 });
 
-const ItemCard = ({ title, price, imageUrl }) => {
+const ItemCard = ({ item }) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/item/${item.id}`);
+    }
+
     return (
         <Grid item xs={3}>
-            <ButtonBase disableRipple>
+            <ButtonBase disableRipple onClick={handleClick}>
                 <Card elevation={6}>
                     <CardMedia
                         component='img'
                         image='https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'
                         //image={imageUrl}
-                        alt={title}
+                        alt={item.title}
                     />
                     <CardContent>
                         <Typography gutterBottom variant='h5'>
-                            { title }
+                            { item.title }
                         </Typography>
                         <Typography variant='body1' color='text.secondary'>
-                            { usdFormatter.format(price) }
+                            { usdFormatter.format(item.price) }
                         </Typography>
                     </CardContent>
                 </Card>
