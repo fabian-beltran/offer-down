@@ -4,7 +4,7 @@ import { Container, Grid, Typography, Divider, Box, Stack, Button } from '@mui/m
 import ShareIcon from '@mui/icons-material/ShareOutlined'; 
 import FavoriteIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { getItem } from '../../../services/items';
+import { getItem } from '../../services/items';
 
 const usdFormatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -22,14 +22,14 @@ const Item = () => {
     return item && (
         <Container sx={{ py: 8 }}>
             <Grid container spacing={4} justifyContent='center'>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                     <Box
                         component='img'
                         src={item.image_url || 'https://airconmidnorthcoast.com.au/wp-content/uploads/2018/11/img-placeholder.png'}
                         sx={{ borderRadius: 1, width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={12} lg={3}>
                     <Stack spacing={1.5}>
                         <Typography variant='h4' fontWeight='bold'>
                             { item.title }

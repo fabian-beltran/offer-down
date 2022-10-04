@@ -58,7 +58,8 @@ const CreateItem = () => {
                         <Controller
                             name='price'
                             control={control}
-                            render={({ field }) => <TextField variant='outlined' label='Price' InputProps={{ startAdornment: <InputAdornment>$</InputAdornment> }} required {...field} />}
+                            rules={{ min: 0, max: 9999999 }}
+                            render={({ field }) => <TextField variant='outlined' label='Price' type='number' InputProps={{ startAdornment: <InputAdornment sx={{ mr: 1 }}>$</InputAdornment> }} required {...field} />}
                         />
                         <Controller
                             name='condition'
