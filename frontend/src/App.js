@@ -3,6 +3,7 @@ import ThemeProvider from './components/ThemeProvider';
 import AuthRoutes from './components/AuthRoutes';
 import UnauthRoutes from './components/UnauthRoutes';
 import { AuthProvider } from './components/AuthContext';
+import { DarkModeProvider } from './components/DarkModeContext';
 import Layout from './components/Layout'
 
 import Home from './pages/Home';
@@ -14,29 +15,30 @@ import Item from './pages/authenticated/Item';
 
 function App() {
 
-
     return (
         <AuthProvider>
-            <ThemeProvider>
-                <Router>
-                    <Layout>
-                        <Routes>
-                            <Route path='/' element={<Home />} />
-                            <Route path='/item/:id' element={<Item/>}/>
-                            
-                            <Route element={<UnauthRoutes/>}>
-                                <Route path='/login' element={<Login />} />
-                                <Route path='/register' element={<Register />} />
-                            </Route>
-                            <Route element={<AuthRoutes />}>
-                                <Route element={<AccountSettings />} path='/account' />
-                                <Route element={<CreateItem />} path='/create' />
+            <DarkModeProvider>
+                <ThemeProvider>
+                    <Router>
+                        <Layout>
+                            <Routes>
+                                <Route path='/' element={<Home />} />
+                                <Route path='/item/:id' element={<Item/>}/>
+                                
+                                <Route element={<UnauthRoutes/>}>
+                                    <Route path='/login' element={<Login />} />
+                                    <Route path='/register' element={<Register />} />
+                                </Route>
+                                <Route element={<AuthRoutes />}>
+                                    <Route element={<AccountSettings />} path='/account' />
+                                    <Route element={<CreateItem />} path='/create' />
 
-                            </Route>
-                        </Routes>
-                    </Layout>
-                </Router>
-            </ThemeProvider>
+                                </Route>
+                            </Routes>
+                        </Layout>
+                    </Router>
+                </ThemeProvider>
+            </DarkModeProvider>
         </AuthProvider>
     );
 }
